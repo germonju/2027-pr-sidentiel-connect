@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, CheckCircle, Loader2, X } from "lucide-react";
+import { useState } from "react";
+
+const INSCRIPTION_WEBHOOK = "https://n8n.srv954228.hstgr.cloud/webhook/inscription";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import rallyFoule    from "@/assets/rally-foule.jpg";
 import terrainMeeting from "@/assets/terrain-meeting.png";
@@ -65,8 +68,42 @@ const catColors: Record<string, string> = {
   Interview:  "bg-violet-500/10 text-violet-600",
 };
 
+type InscriptionState = "idle" | "loading" | "success" | "error";
+
 function Actualites() {
   useScrollReveal();
+
+  const [activeEvent, setActiveEvent]   = useState<string | null>(null);
+  const [email, setEmail]               = useState("");
+  const [inscriptions, setInscriptions] = useState<Record<string, InscriptionState>>({});
+
+  const openForm = (city: string) => {
+    setActiveEvent(city);
+    setEmail("");
+  };
+  const closeForm = () => setActiveEvent(null);
+
+  const handleInscription = async (e: React.FormEvent, event: typeof events[0]) => {
+    e.preventDefault();
+    setInscriptions((p) => ({ ...p, [event.city]: "loading" }));
+    try {
+      const res = await fetch(INSCRIPTION_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          ville:  event.city,
+          salle:  event.venue,
+          date:   event.date,
+          heure:  event.time,
+        }),
+      });
+      setInscriptions((p) => ({ ...p, [event.city]: res.ok ? "success" : "error" }));
+      if (res.ok) setActiveEvent(null);
+    } catch {
+      setInscriptions((p) => ({ ...p, [event.city]: "error" }));
+    }
+  };
 
   const [featured, ...rest] = news;
 
@@ -152,25 +189,82 @@ function Actualites() {
               Prochains meetings
             </h2>
             <ul className="space-y-3">
-              {events.map((e) => (
-                <li
-                  key={e.city}
-                  className="card-hover cursor-pointer bg-card border border-border rounded-xl p-4"
-                >
-                  <div className="flex items-center gap-2 text-xs text-destructive font-semibold uppercase tracking-wider">
-                    <Calendar className="h-3.5 w-3.5" />
-                    {e.date} · {e.time}
-                  </div>
-                  <div className="mt-2 font-display text-lg font-semibold text-foreground">{e.city}</div>
-                  <div className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
-                    <MapPin className="h-3.5 w-3.5 shrink-0" />
-                    {e.venue}
-                  </div>
-                  <button className="mt-3 w-full cursor-pointer rounded-lg bg-primary/8 text-primary text-xs font-semibold py-2 hover:bg-primary hover:text-primary-foreground transition-colors">
-                    S'inscrire
-                  </button>
-                </li>
-              ))}
+              {events.map((e) => {
+                const state   = inscriptions[e.city] ?? "idle";
+                const isOpen  = activeEvent === e.city;
+
+                return (
+                  <li
+                    key={e.city}
+                    className="bg-card border border-border rounded-xl p-4 transition-all"
+                    style={{ borderColor: isOpen ? "var(--bleu)" : undefined }}
+                  >
+                    <div className="flex items-center gap-2 text-xs text-destructive font-semibold uppercase tracking-wider">
+                      <Calendar className="h-3.5 w-3.5" />
+                      {e.date} · {e.time}
+                    </div>
+                    <div className="mt-2 font-display text-lg font-semibold text-foreground">{e.city}</div>
+                    <div className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
+                      <MapPin className="h-3.5 w-3.5 shrink-0" />
+                      {e.venue}
+                    </div>
+
+                    {/* Succès */}
+                    {state === "success" ? (
+                      <div className="mt-3 flex items-center gap-2 rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-2 text-sm text-emerald-700">
+                        <CheckCircle className="h-4 w-4 shrink-0" />
+                        Inscription confirmée ! Vérifiez vos emails.
+                      </div>
+                    ) : isOpen ? (
+                      /* Formulaire inline */
+                      <form
+                        className="mt-3 space-y-2"
+                        onSubmit={(ev) => handleInscription(ev, e)}
+                      >
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="email"
+                            required
+                            autoFocus
+                            placeholder="Votre email"
+                            value={email}
+                            onChange={(ev) => setEmail(ev.target.value)}
+                            className="flex-1 rounded-lg bg-secondary border border-border px-3 py-2 text-sm focus:outline-none focus:border-primary transition-colors"
+                          />
+                          <button
+                            type="button"
+                            onClick={closeForm}
+                            className="cursor-pointer text-muted-foreground hover:text-foreground p-1 transition-colors"
+                            aria-label="Annuler"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                        </div>
+                        {state === "error" && (
+                          <p className="text-xs text-destructive">Erreur, veuillez réessayer.</p>
+                        )}
+                        <button
+                          type="submit"
+                          disabled={state === "loading"}
+                          className="w-full cursor-pointer rounded-lg bg-primary text-primary-foreground text-xs font-semibold py-2 hover:opacity-90 transition-opacity disabled:opacity-60 flex items-center justify-center gap-1.5"
+                        >
+                          {state === "loading" ? (
+                            <><Loader2 className="h-3.5 w-3.5 animate-spin" />Envoi…</>
+                          ) : "Confirmer mon inscription"}
+                        </button>
+                      </form>
+                    ) : (
+                      /* Bouton initial */
+                      <button
+                        onClick={() => openForm(e.city)}
+                        className="mt-3 w-full cursor-pointer rounded-lg bg-primary/8 text-primary text-xs font-semibold py-2 hover:bg-primary hover:text-primary-foreground transition-colors"
+                      >
+                        S'inscrire
+                      </button>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
 
             {/* Newsletter */}
