@@ -118,7 +118,7 @@ function Engagement() {
           src={portraitEngagement}
           alt="Hugo Varennes — Pour une France qui avance"
           className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: "center 30%" }}
+          style={{ objectPosition: "center 25%" }}
         />
         <div
           className="absolute inset-0"
