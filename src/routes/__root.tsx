@@ -83,8 +83,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Hugo Varennes — Présidentielle 2027" },
       { name: "twitter:description", content: "Hugo Varennes, candidat à l'élection présidentielle française de 2027. Pour la France de demain : justice, souveraineté, écologie." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/82c6b37a-e49c-4dee-82ae-d576b31bba42/id-preview-e98ec3c1--e4797776-705a-4c69-92d6-541bde698244.lovable.app-1778859536837.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/82c6b37a-e49c-4dee-82ae-d576b31bba42/id-preview-e98ec3c1--e4797776-705a-4c69-92d6-541bde698244.lovable.app-1778859536837.png" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/LxNFhy9aHCOigVzM9ApwFxwFFFK2/social-images/social-1778870028470-IMG_0593_-_copie.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/LxNFhy9aHCOigVzM9ApwFxwFFFK2/social-images/social-1778870028470-IMG_0593_-_copie.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
