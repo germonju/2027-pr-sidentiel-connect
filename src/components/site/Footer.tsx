@@ -72,6 +72,7 @@ export function Footer() {
             <li className="pt-1">
               <Link
                 to="/engagement"
+                hash="don"
                 className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg bg-destructive text-destructive-foreground px-4 py-2 text-xs font-semibold hover:opacity-90 transition-opacity"
               >
                 Faire un don

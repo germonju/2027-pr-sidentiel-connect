@@ -118,7 +118,7 @@ function Engagement() {
           src={portraitEngagement}
           alt="Hugo Varennes — Pour une France qui avance"
           className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: "center 15%" }}
+          style={{ objectPosition: "center 30%" }}
         />
         <div
           className="absolute inset-0"
@@ -160,7 +160,7 @@ function Engagement() {
       </section>
 
       {/* ── FORMULAIRES ─────────────────────────────────────────── */}
-      <section className="container-narrow grid lg:grid-cols-2 gap-8 pb-24">
+      <section id="don" className="container-narrow grid lg:grid-cols-2 gap-8 pb-24" style={{ scrollMarginTop: "80px" }}>
 
         {/* ── DON STRIPE ── */}
         <div

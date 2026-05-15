@@ -57,6 +57,7 @@ export function Header() {
           ))}
           <Link
             to="/engagement"
+            hash="don"
             className="ml-3 inline-flex cursor-pointer items-center justify-center rounded-lg bg-destructive text-destructive-foreground px-4 py-2 text-sm font-semibold hover:opacity-90 transition-opacity shadow-sm"
           >
             Faire un don
