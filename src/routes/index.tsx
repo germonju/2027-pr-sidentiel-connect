@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronDown, Leaf, Shield, GraduationCap, Heart, Briefcase, Globe2 } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import portraitElysee from "@/assets/portrait-elysee.png";
+import portraitHero from "@/assets/portrait-hero.png";
 import rallySoir from "@/assets/rally-soir.png";
 
 export const Route = createFileRoute("/")({
@@ -52,7 +52,7 @@ function Index() {
           style={{ width: "48%" }}
         >
           <img
-            src={portraitElysee}
+            src={portraitHero}
             alt="Portrait officiel de Hugo Varennes, candidat à la présidentielle 2027"
             className="h-full w-full object-cover object-top"
           />
@@ -78,7 +78,7 @@ function Index() {
             {/* Portrait mobile */}
             <div className="hero-animate delay-100 lg:hidden mb-8 aspect-[4/5] rounded-2xl overflow-hidden max-w-[220px]">
               <img
-                src={portraitElysee}
+                src={portraitHero}
                 alt="Hugo Varennes"
                 className="h-full w-full object-cover object-top"
               />
