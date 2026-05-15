@@ -67,7 +67,7 @@ export function Footer() {
         <div className="md:col-span-3">
           <h4 className="text-sm font-semibold text-foreground mb-4">Contact</h4>
           <ul className="space-y-2.5 text-sm text-muted-foreground">
-            <li>contact@hugovarennes2027.fr</li>
+            <li>contact@varennes2027.com</li>
             <li>12 rue de la République<br />75011 Paris</li>
             <li className="pt-1">
               <Link
@@ -86,8 +86,8 @@ export function Footer() {
         <div className="container-narrow py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
           <p>© 2026 Comité de soutien Hugo Varennes. Tous droits réservés.</p>
           <p className="flex gap-4">
-            <a href="#" className="hover:text-primary transition-colors cursor-pointer">Mentions légales</a>
-            <a href="#" className="hover:text-primary transition-colors cursor-pointer">Politique de confidentialité</a>
+            <Link to="/mentions-legales" className="hover:text-primary transition-colors cursor-pointer">Mentions légales</Link>
+            <Link to="/confidentialite" className="hover:text-primary transition-colors cursor-pointer">Politique de confidentialité</Link>
           </p>
         </div>
       </div>

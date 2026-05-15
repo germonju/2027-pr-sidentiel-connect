@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProgrammeRouteImport } from './routes/programme'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as EngagementRouteImport } from './routes/engagement'
+import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as BioRouteImport } from './routes/bio'
 import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as IndexRouteImport } from './routes/index'
@@ -27,9 +29,19 @@ const ProgrammeRoute = ProgrammeRouteImport.update({
   path: '/programme',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EngagementRoute = EngagementRouteImport.update({
   id: '/engagement',
   path: '/engagement',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
+  id: '/confidentialite',
+  path: '/confidentialite',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BioRoute = BioRouteImport.update({
@@ -57,7 +69,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/actualites': typeof ActualitesRoute
   '/bio': typeof BioRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/engagement': typeof EngagementRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/programme': typeof ProgrammeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/create-checkout': typeof ApiCreateCheckoutRoute
@@ -66,7 +80,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/actualites': typeof ActualitesRoute
   '/bio': typeof BioRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/engagement': typeof EngagementRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/programme': typeof ProgrammeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/create-checkout': typeof ApiCreateCheckoutRoute
@@ -76,7 +92,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/actualites': typeof ActualitesRoute
   '/bio': typeof BioRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/engagement': typeof EngagementRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/programme': typeof ProgrammeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/create-checkout': typeof ApiCreateCheckoutRoute
@@ -87,7 +105,9 @@ export interface FileRouteTypes {
     | '/'
     | '/actualites'
     | '/bio'
+    | '/confidentialite'
     | '/engagement'
+    | '/mentions-legales'
     | '/programme'
     | '/sitemap.xml'
     | '/api/create-checkout'
@@ -96,7 +116,9 @@ export interface FileRouteTypes {
     | '/'
     | '/actualites'
     | '/bio'
+    | '/confidentialite'
     | '/engagement'
+    | '/mentions-legales'
     | '/programme'
     | '/sitemap.xml'
     | '/api/create-checkout'
@@ -105,7 +127,9 @@ export interface FileRouteTypes {
     | '/'
     | '/actualites'
     | '/bio'
+    | '/confidentialite'
     | '/engagement'
+    | '/mentions-legales'
     | '/programme'
     | '/sitemap.xml'
     | '/api/create-checkout'
@@ -115,7 +139,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ActualitesRoute: typeof ActualitesRoute
   BioRoute: typeof BioRoute
+  ConfidentialiteRoute: typeof ConfidentialiteRoute
   EngagementRoute: typeof EngagementRoute
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
   ProgrammeRoute: typeof ProgrammeRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiCreateCheckoutRoute: typeof ApiCreateCheckoutRoute
@@ -137,11 +163,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgrammeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/engagement': {
       id: '/engagement'
       path: '/engagement'
       fullPath: '/engagement'
       preLoaderRoute: typeof EngagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confidentialite': {
+      id: '/confidentialite'
+      path: '/confidentialite'
+      fullPath: '/confidentialite'
+      preLoaderRoute: typeof ConfidentialiteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bio': {
@@ -179,7 +219,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActualitesRoute: ActualitesRoute,
   BioRoute: BioRoute,
+  ConfidentialiteRoute: ConfidentialiteRoute,
   EngagementRoute: EngagementRoute,
+  MentionsLegalesRoute: MentionsLegalesRoute,
   ProgrammeRoute: ProgrammeRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiCreateCheckoutRoute: ApiCreateCheckoutRoute,
