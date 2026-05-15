@@ -112,8 +112,9 @@ function Index() {
               className="hero-animate delay-300 mt-6 text-lg leading-relaxed"
               style={{ color: "rgba(255,255,255,0.62)", maxWidth: "430px" }}
             >
-              Hugo Varennes porte un projet d'unité, de courage et d'ambition.
-              Une République retrouvée, une économie souveraine, une planète habitable.
+              Fils d'un professeur et d'une institutrice, formé par la République,
+              député pendant quinze ans : Hugo Varennes sait d'où il vient,
+              et sait où mener la France.
             </p>
 
             {/* CTA */}
@@ -142,7 +143,7 @@ function Index() {
               {[
                 { n: "+120k", l: "Soutiens" },
                 { n: "350", l: "Comités locaux" },
-                { n: "18 mois", l: "De campagne" },
+                { n: "30 ans", l: "D'engagement" },
               ].map(({ n, l }) => (
                 <div key={l}>
                   <div className="font-display text-3xl font-semibold text-white">{n}</div>
@@ -226,8 +227,8 @@ function Index() {
         <div className="container-narrow max-w-3xl mx-auto text-center reveal">
           <div className="tricolore-accent mx-auto mb-8" />
           <blockquote className="font-display text-3xl md:text-4xl font-semibold text-foreground leading-tight">
-            « Je ne me bats pas pour le pouvoir. Je me bats pour que la France
-            retrouve confiance en elle-même. »
+            « Un pays ne se gouverne pas depuis les sommets. Il se gouverne depuis les réalités.
+            C'est pour ça que je me lève chaque matin. »
           </blockquote>
           <footer className="mt-6 text-sm text-muted-foreground">
             Hugo Varennes · Discours de lancement de campagne, mars 2026
