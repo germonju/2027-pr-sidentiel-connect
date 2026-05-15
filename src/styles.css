@@ -117,3 +117,105 @@
     padding-inline: 1.25rem;
   }
 }
+
+/* ── KEYFRAMES ───────────────────────────────────────────────── */
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroImageIn {
+  from { opacity: 0; transform: scale(1.06); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes bounceSoft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(7px); }
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+
+/* ── HERO ENTRANCE ───────────────────────────────────────────── */
+
+.hero-animate     { animation: heroFadeIn  0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.hero-animate-img { animation: heroImageIn 1.3s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+.delay-100 { animation-delay: 0.10s; }
+.delay-200 { animation-delay: 0.20s; }
+.delay-300 { animation-delay: 0.30s; }
+.delay-400 { animation-delay: 0.40s; }
+.delay-500 { animation-delay: 0.50s; }
+.delay-600 { animation-delay: 0.60s; }
+.delay-700 { animation-delay: 0.70s; }
+.delay-800 { animation-delay: 0.80s; }
+
+.pulse-dot { animation: pulseDot   1.6s ease-in-out infinite; }
+.bounce-y  { animation: bounceSoft 2.5s ease-in-out infinite; }
+
+/* ── SCROLL REVEAL ───────────────────────────────────────────── */
+
+.reveal,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-duration: 0.72s;
+}
+.reveal       { opacity: 0; transform: translateY(28px); }
+.reveal-left  { opacity: 0; transform: translateX(-28px); }
+.reveal-right { opacity: 0; transform: translateX(28px); }
+.reveal-scale { opacity: 0; transform: scale(0.93); }
+
+.reveal.visible,
+.reveal-left.visible,
+.reveal-right.visible,
+.reveal-scale.visible { opacity: 1; transform: none; }
+
+.reveal-delay-1 { transition-delay: 0.10s; }
+.reveal-delay-2 { transition-delay: 0.20s; }
+.reveal-delay-3 { transition-delay: 0.30s; }
+.reveal-delay-4 { transition-delay: 0.40s; }
+.reveal-delay-5 { transition-delay: 0.50s; }
+.reveal-delay-6 { transition-delay: 0.60s; }
+
+/* ── CARD HOVER ──────────────────────────────────────────────── */
+
+.card-hover {
+  transition: border-color 0.2s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover:hover {
+  border-color: var(--bleu);
+  box-shadow: 0 12px 40px -10px color-mix(in oklab, var(--bleu) 22%, transparent);
+  transform: translateY(-3px);
+}
+
+/* ── UTILITIES ───────────────────────────────────────────────── */
+
+.glass {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.tricolore-accent {
+  display: block;
+  height: 4px;
+  width: 3rem;
+  border-radius: 9999px;
+  background: var(--gradient-tricolore);
+}
+
+/* ── REDUCED MOTION ──────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-right, .reveal-scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-animate, .hero-animate-img { animation: none; opacity: 1; }
+  .pulse-dot, .bounce-y { animation: none; }
+}
