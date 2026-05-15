@@ -33,22 +33,48 @@ function Index() {
     <>
       {/* ── HERO ────────────────────────────────────────────────── */}
       <section
-        className="relative min-h-screen flex items-center overflow-hidden"
+        className="relative overflow-hidden lg:min-h-screen lg:flex lg:items-center"
         style={{ background: "var(--bleu-deep)" }}
       >
         {/* Glow orbs décoratifs */}
         <div
-          className="absolute -top-48 -left-48 h-[800px] w-[800px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.22), transparent 70%)" }}
+          className="absolute -top-48 -left-48 h-[600px] w-[600px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.2), transparent 70%)" }}
         />
         <div
-          className="absolute bottom-0 right-1/3 h-[500px] w-[700px] rounded-full pointer-events-none"
+          className="absolute bottom-0 right-1/3 h-[400px] w-[600px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(237,41,57,0.1), transparent 70%)" }}
         />
 
-        {/* Portrait — côté droit desktop */}
+        {/* ── Portrait mobile : pleine largeur en haut ── */}
         <div
-          className="hero-animate-img absolute inset-y-0 right-0 hidden lg:block"
+          className="hero-animate-img lg:hidden relative w-full shrink-0 overflow-hidden"
+          style={{ height: "52svh" }}
+        >
+          <img
+            src={portraitHero}
+            alt="Hugo Varennes, candidat à la présidentielle 2027"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            style={{ filter: "brightness(1.1) contrast(1.06)" }}
+          />
+          {/* Fondu haut (zone header) */}
+          <div
+            className="absolute top-0 inset-x-0 h-20"
+            style={{ background: "linear-gradient(to bottom, var(--bleu-deep), transparent)" }}
+          />
+          {/* Fondu bas */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, var(--bleu-deep) 0%, color-mix(in oklab, var(--bleu-deep) 30%, transparent) 35%, transparent 70%)",
+            }}
+          />
+        </div>
+
+        {/* ── Portrait desktop : côté droit absolu ── */}
+        <div
+          className="hero-animate-img hidden lg:block absolute inset-y-0 right-0"
           style={{ width: "52%" }}
         >
           <img
@@ -57,7 +83,6 @@ function Index() {
             className="h-full w-full object-cover object-center"
             style={{ filter: "brightness(1.08) contrast(1.05)" }}
           />
-          {/* Fondu gauche — léger pour laisser la photo respirer */}
           <div
             className="absolute inset-0"
             style={{
@@ -65,25 +90,15 @@ function Index() {
                 "linear-gradient(to right, var(--bleu-deep) 0%, color-mix(in oklab, var(--bleu-deep) 60%, transparent) 20%, color-mix(in oklab, var(--bleu-deep) 10%, transparent) 45%, transparent 100%)",
             }}
           />
-          {/* Fondu bas */}
           <div
             className="absolute inset-0"
             style={{ background: "linear-gradient(to top, var(--bleu-deep) 0%, transparent 22%)" }}
           />
         </div>
 
-        {/* Contenu principal */}
-        <div className="container-narrow relative z-10 w-full pt-20 pb-28 lg:pb-16">
+        {/* ── Contenu ── */}
+        <div className="container-narrow relative z-10 w-full py-8 lg:py-20">
           <div className="max-w-xl">
-
-            {/* Portrait mobile */}
-            <div className="hero-animate delay-100 lg:hidden mb-8 aspect-[4/5] rounded-2xl overflow-hidden max-w-[220px]">
-              <img
-                src={portraitHero}
-                alt="Hugo Varennes"
-                className="h-full w-full object-cover object-top"
-              />
-            </div>
 
             {/* Badge */}
             <div
@@ -100,8 +115,8 @@ function Index() {
 
             {/* H1 */}
             <h1
-              className="hero-animate delay-200 mt-7 font-display font-semibold leading-[1.05] tracking-tight text-white"
-              style={{ fontSize: "clamp(2.8rem, 5.5vw, 4.8rem)" }}
+              className="hero-animate delay-200 mt-5 lg:mt-7 font-display font-semibold leading-[1.05] tracking-tight text-white"
+              style={{ fontSize: "clamp(2rem, 8vw, 4.8rem)" }}
             >
               Pour la France
               <br />
@@ -110,27 +125,27 @@ function Index() {
 
             {/* Accroche */}
             <p
-              className="hero-animate delay-300 mt-6 text-lg leading-relaxed"
-              style={{ color: "rgba(255,255,255,0.62)", maxWidth: "430px" }}
+              className="hero-animate delay-300 mt-4 lg:mt-6 text-base lg:text-lg leading-relaxed"
+              style={{ color: "rgba(255,255,255,0.65)" }}
             >
               Fils d'un professeur et d'une institutrice, formé par la République,
               député pendant quinze ans : Hugo Varennes sait d'où il vient,
               et sait où mener la France.
             </p>
 
-            {/* CTA */}
-            <div className="hero-animate delay-400 mt-9 flex flex-wrap gap-3">
+            {/* CTAs — pleine largeur sur mobile */}
+            <div className="hero-animate delay-400 mt-6 lg:mt-9 flex flex-col sm:flex-row gap-3">
               <Link
                 to="/programme"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-semibold transition-opacity hover:opacity-90"
+                className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-semibold transition-opacity hover:opacity-90"
                 style={{ color: "var(--bleu-deep)" }}
               >
                 Découvrir le programme <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/engagement"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-xl border px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-                style={{ borderColor: "rgba(255,255,255,0.25)" }}
+                className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                style={{ borderColor: "rgba(255,255,255,0.28)" }}
               >
                 Rejoindre le mouvement
               </Link>
@@ -138,19 +153,24 @@ function Index() {
 
             {/* Stats */}
             <div
-              className="hero-animate delay-500 mt-12 grid grid-cols-3 gap-6 pt-8"
+              className="hero-animate delay-500 mt-8 lg:mt-12 grid grid-cols-3 gap-4 pt-6"
               style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }}
             >
               {[
                 { n: "+120k", l: "Soutiens" },
-                { n: "350", l: "Comités locaux" },
-                { n: "30 ans", l: "D'engagement" },
+                { n: "350", l: "Comités" },
+                { n: "30 ans", l: "Engagement" },
               ].map(({ n, l }) => (
                 <div key={l}>
-                  <div className="font-display text-3xl font-semibold text-white">{n}</div>
                   <div
-                    className="mt-1 text-[11px] uppercase tracking-widest"
-                    style={{ color: "rgba(255,255,255,0.4)" }}
+                    className="font-display font-semibold text-white"
+                    style={{ fontSize: "clamp(1.5rem, 5vw, 2rem)" }}
+                  >
+                    {n}
+                  </div>
+                  <div
+                    className="mt-0.5 text-[10px] uppercase tracking-widest"
+                    style={{ color: "rgba(255,255,255,0.42)" }}
                   >
                     {l}
                   </div>
@@ -180,8 +200,8 @@ function Index() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+        {/* Scroll indicator — desktop uniquement */}
+        <div className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
           <ChevronDown className="h-5 w-5 bounce-y" style={{ color: "rgba(255,255,255,0.35)" }} />
         </div>
       </section>
