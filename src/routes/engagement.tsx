@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Heart, Users, Megaphone, Mail, CheckCircle } from "lucide-react";
+import { Heart, Users, Megaphone, Mail, CheckCircle, Loader2 } from "lucide-react";
+
+const WEBHOOK_URL = "https://n8n.srv954228.hstgr.cloud/webhook/contact";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import portraitEngagement from "@/assets/portrait-engagement.png";
 
@@ -42,11 +44,37 @@ const actions = [
 
 function Engagement() {
   useScrollReveal();
-  const [amount, setAmount]     = useState<number>(50);
-  const [custom, setCustom]     = useState("");
-  const [submitted, setSubmitted] = useState<null | "don" | "contact">(null);
+  const [amount, setAmount] = useState<number>(50);
+  const [custom, setCustom] = useState("");
+  const [submitted, setSubmitted] = useState<null | "don">(null);
+
+  const [contactState, setContactState] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const finalAmount = custom ? Number(custom) : amount;
+
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setContactState("loading");
+    const fd = new FormData(e.currentTarget);
+    const body = {
+      prenom:     fd.get("prenom"),
+      nom:        fd.get("nom"),
+      email:      fd.get("email"),
+      codePostal: fd.get("codePostal"),
+      type:       fd.get("type"),
+      message:    fd.get("message"),
+    };
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      setContactState(res.ok ? "success" : "error");
+    } catch {
+      setContactState("error");
+    }
+  };
 
   return (
     <>
@@ -192,58 +220,78 @@ function Engagement() {
             Laissez-nous vos coordonnées : un référent local vous contactera sous 48h.
           </p>
 
-          {submitted === "contact" ? (
+          {contactState === "success" ? (
             <div className="mt-8 text-center">
               <CheckCircle className="h-12 w-12 text-primary mx-auto" />
-              <p className="mt-4 font-display text-xl font-semibold text-foreground">Message bien reçu !</p>
+              <p className="mt-4 font-display text-xl font-semibold text-foreground">
+                Message bien envoyé !
+              </p>
               <p className="mt-2 text-sm text-muted-foreground">
-                Un référent local prendra contact avec vous sous 48h.
+                Merci pour votre engagement. Un référent local vous contactera sous 48h.
               </p>
             </div>
           ) : (
-            <form
-              className="mt-6 space-y-4"
-              onSubmit={(e) => { e.preventDefault(); setSubmitted("contact"); }}
-            >
+            <form className="mt-6 space-y-4" onSubmit={handleContactSubmit}>
               <div className="grid sm:grid-cols-2 gap-3">
                 <input
                   required
+                  name="prenom"
                   placeholder="Prénom"
                   className="rounded-lg bg-secondary px-4 py-2.5 text-sm border border-border focus:outline-none focus:border-primary transition-colors"
                 />
                 <input
                   required
+                  name="nom"
                   placeholder="Nom"
                   className="rounded-lg bg-secondary px-4 py-2.5 text-sm border border-border focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
               <input
                 required
+                name="email"
                 type="email"
                 placeholder="Email"
                 className="w-full rounded-lg bg-secondary px-4 py-2.5 text-sm border border-border focus:outline-none focus:border-primary transition-colors"
               />
               <input
                 required
+                name="codePostal"
                 placeholder="Code postal"
                 className="w-full rounded-lg bg-secondary px-4 py-2.5 text-sm border border-border focus:outline-none focus:border-primary transition-colors"
               />
-              <select className="w-full cursor-pointer rounded-lg bg-secondary px-4 py-2.5 text-sm border border-border focus:outline-none focus:border-primary transition-colors text-foreground">
+              <select
+                name="type"
+                className="w-full cursor-pointer rounded-lg bg-secondary px-4 py-2.5 text-sm border border-border focus:outline-none focus:border-primary transition-colors text-foreground"
+              >
                 <option>Je veux devenir bénévole</option>
                 <option>Rejoindre un comité local</option>
                 <option>Proposer une idée au programme</option>
                 <option>Demande presse</option>
               </select>
               <textarea
+                name="message"
                 rows={4}
                 placeholder="Votre message (optionnel)"
                 className="w-full rounded-lg bg-secondary px-4 py-2.5 text-sm border border-border focus:outline-none focus:border-primary transition-colors resize-none"
               />
+
+              {contactState === "error" && (
+                <p className="text-sm text-destructive bg-destructive/8 border border-destructive/20 rounded-lg px-4 py-3">
+                  Une erreur s'est produite. Veuillez réessayer ou nous contacter par email.
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="w-full cursor-pointer rounded-xl bg-primary text-primary-foreground py-3.5 text-sm font-semibold hover:opacity-95 transition-opacity shadow-sm"
+                disabled={contactState === "loading"}
+                className="w-full cursor-pointer rounded-xl bg-primary text-primary-foreground py-3.5 text-sm font-semibold hover:opacity-95 transition-opacity shadow-sm disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                Envoyer
+                {contactState === "loading" ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Envoi en cours…
+                  </>
+                ) : "Envoyer"}
               </button>
             </form>
           )}
