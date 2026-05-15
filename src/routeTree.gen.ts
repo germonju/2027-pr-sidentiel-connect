@@ -15,6 +15,7 @@ import { Route as EngagementRouteImport } from './routes/engagement'
 import { Route as BioRouteImport } from './routes/bio'
 import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiCreateCheckoutRouteImport } from './routes/api/create-checkout'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -46,6 +47,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCreateCheckoutRoute = ApiCreateCheckoutRouteImport.update({
+  id: '/api/create-checkout',
+  path: '/api/create-checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/engagement': typeof EngagementRoute
   '/programme': typeof ProgrammeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/create-checkout': typeof ApiCreateCheckoutRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/engagement': typeof EngagementRoute
   '/programme': typeof ProgrammeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/create-checkout': typeof ApiCreateCheckoutRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/engagement': typeof EngagementRoute
   '/programme': typeof ProgrammeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/create-checkout': typeof ApiCreateCheckoutRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/engagement'
     | '/programme'
     | '/sitemap.xml'
+    | '/api/create-checkout'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/engagement'
     | '/programme'
     | '/sitemap.xml'
+    | '/api/create-checkout'
   id:
     | '__root__'
     | '/'
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/engagement'
     | '/programme'
     | '/sitemap.xml'
+    | '/api/create-checkout'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +118,7 @@ export interface RootRouteChildren {
   EngagementRoute: typeof EngagementRoute
   ProgrammeRoute: typeof ProgrammeRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiCreateCheckoutRoute: typeof ApiCreateCheckoutRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/create-checkout': {
+      id: '/api/create-checkout'
+      path: '/api/create-checkout'
+      fullPath: '/api/create-checkout'
+      preLoaderRoute: typeof ApiCreateCheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   EngagementRoute: EngagementRoute,
   ProgrammeRoute: ProgrammeRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiCreateCheckoutRoute: ApiCreateCheckoutRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

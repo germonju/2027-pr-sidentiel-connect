@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Heart, Users, Megaphone, Mail, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import portraitEngagement from "@/assets/portrait-engagement.png";
-import { createCheckoutSession } from "@/lib/checkout";
+import { createCheckout } from "@/lib/checkout";
 
 const WEBHOOK_URL = "https://n8n.srv954228.hstgr.cloud/webhook/contact";
 
@@ -68,8 +68,8 @@ function Engagement() {
     setDonLoading(true);
     setDonError(false);
     try {
-      const result = await createCheckoutSession({
-        data: { amount: finalAmount, email: donEmail, prenom: donPrenom, nom: donNom },
+      const result = await createCheckout({
+        amount: finalAmount, email: donEmail, prenom: donPrenom, nom: donNom,
       });
       if (result.url) {
         window.location.href = result.url;
