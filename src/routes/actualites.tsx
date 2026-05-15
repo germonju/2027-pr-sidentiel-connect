@@ -93,7 +93,7 @@ function Actualites() {
                 src={featured.img}
                 alt={featured.title}
                 loading="lazy"
-                className="h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
             </div>
             <div className="mt-5">
