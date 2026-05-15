@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronDown, Leaf, Shield, GraduationCap, Heart, Briefcase, Globe2 } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import portraitHero from "@/assets/portrait-hero.png";
-import rallySoir from "@/assets/rally-soir.png";
+import rallyNuit from "@/assets/rally-nuit.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -260,10 +260,10 @@ function Index() {
       {/* ── RALLY CTA ───────────────────────────────────────────── */}
       <section className="relative py-28 overflow-hidden">
         <img
-          src={rallySoir}
+          src={rallyNuit}
           alt="Hugo Varennes au discours de campagne"
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover object-top"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div
           className="absolute inset-0"
