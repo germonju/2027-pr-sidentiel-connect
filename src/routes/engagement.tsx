@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Heart, Users, Megaphone, Mail, CheckCircle } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import rallyNuit from "@/assets/rally-nuit.png";
+import portraitEngagement from "@/assets/portrait-engagement.png";
 
 export const Route = createFileRoute("/engagement")({
   head: () => ({
@@ -53,9 +53,9 @@ function Engagement() {
       {/* ── HERO SECTION ────────────────────────────────────────── */}
       <section className="relative py-20 overflow-hidden">
         <img
-          src={rallyNuit}
-          alt="Hugo Varennes au meeting"
-          className="absolute inset-0 h-full w-full object-cover object-top"
+          src={portraitEngagement}
+          alt="Hugo Varennes — Pour une France qui avance"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div
           className="absolute inset-0"
