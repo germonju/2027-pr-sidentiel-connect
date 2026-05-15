@@ -72,9 +72,9 @@ function Bio() {
       </section>
 
       {/* ── PORTRAIT + TEXTE ─────────────────────────────────────── */}
-      <section className="container-narrow grid lg:grid-cols-5 gap-12 pb-20">
+      <section className="container-narrow grid lg:grid-cols-5 gap-12 pb-20 overflow-x-clip">
         {/* Photo */}
-        <div className="lg:col-span-2 reveal-left">
+        <div className="lg:col-span-2 reveal">
           <div className="relative">
             <div
               className="absolute -inset-3 rounded-3xl blur-2xl opacity-25"
@@ -87,8 +87,8 @@ function Bio() {
                 className="h-full w-full object-cover object-top"
               />
             </div>
-            {/* Stats flottants */}
-            <div className="absolute -bottom-5 -right-4 bg-card border border-border rounded-xl p-4 shadow-[var(--shadow-card)]">
+            {/* Stats — inline sur mobile, flottants sur desktop */}
+            <div className="hidden lg:block absolute -bottom-5 -right-4 bg-card border border-border rounded-xl p-4 shadow-[var(--shadow-card)]">
               <div className="flex gap-5 divide-x divide-border">
                 {valeurs.map(({ n, l }) => (
                   <div key={l} className="text-center px-3 first:pl-0 last:pr-0">
@@ -99,10 +99,22 @@ function Bio() {
               </div>
             </div>
           </div>
+
+          {/* Stats — mobile uniquement, inline sous la photo */}
+          <div className="lg:hidden mt-4 bg-card border border-border rounded-xl p-4 shadow-[var(--shadow-card)]">
+            <div className="flex justify-around divide-x divide-border">
+              {valeurs.map(({ n, l }) => (
+                <div key={l} className="text-center px-3 first:pl-0 last:pr-0">
+                  <div className="font-display text-base font-semibold text-primary leading-tight">{n}</div>
+                  <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5 leading-tight">{l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Texte */}
-        <div className="lg:col-span-3 space-y-6 text-foreground/85 leading-relaxed reveal-right">
+        <div className="lg:col-span-3 space-y-6 text-foreground/85 leading-relaxed reveal">
           <p className="font-display text-2xl text-foreground font-semibold italic leading-snug">
             « Un pays ne se gouverne pas depuis les sommets. Il se gouverne depuis les réalités. »
           </p>
