@@ -4,4 +4,7 @@
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
   "main": "src/server.ts",
+  "vars": {
+    "STRIPE_PUBLIC_KEY": "pk_live_51TXOD4PdxuMnRbHb878HdYudy0S4IscRMdIOO6ycadsoH9tJU27jFzg2QTBePF7g1rJgokNdAJzPigdIZrk6yxi90094JQxlf3"
+  }
 }
