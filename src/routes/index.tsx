@@ -49,25 +49,26 @@ function Index() {
         {/* Portrait — côté droit desktop */}
         <div
           className="hero-animate-img absolute inset-y-0 right-0 hidden lg:block"
-          style={{ width: "48%" }}
+          style={{ width: "52%" }}
         >
           <img
             src={portraitHero}
             alt="Portrait officiel de Hugo Varennes, candidat à la présidentielle 2027"
-            className="h-full w-full object-cover object-top"
+            className="h-full w-full object-cover object-center"
+            style={{ filter: "brightness(1.08) contrast(1.05)" }}
           />
-          {/* Fondu gauche */}
+          {/* Fondu gauche — léger pour laisser la photo respirer */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to right, var(--bleu-deep) 0%, color-mix(in oklab, var(--bleu-deep) 35%, transparent) 42%, transparent 100%)",
+                "linear-gradient(to right, var(--bleu-deep) 0%, color-mix(in oklab, var(--bleu-deep) 60%, transparent) 20%, color-mix(in oklab, var(--bleu-deep) 10%, transparent) 45%, transparent 100%)",
             }}
           />
           {/* Fondu bas */}
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(to top, var(--bleu-deep) 0%, transparent 28%)" }}
+            style={{ background: "linear-gradient(to top, var(--bleu-deep) 0%, transparent 22%)" }}
           />
         </div>
 
