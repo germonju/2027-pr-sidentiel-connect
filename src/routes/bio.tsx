@@ -147,27 +147,26 @@ function Bio() {
 
       {/* ── PHOTO COUPLE ─────────────────────────────────────────── */}
       <section className="container-narrow pb-16">
-        <div className="reveal grid md:grid-cols-2 gap-8 items-center bg-secondary/40 rounded-3xl overflow-hidden border border-border">
-          {/* Photo */}
-          <div className="relative h-72 md:h-full min-h-[320px] overflow-hidden">
+        <div className="reveal rounded-3xl overflow-hidden border border-border bg-secondary/40 md:grid md:grid-cols-2">
+          {/* Photo — hauteur fixe mobile, stretch desktop */}
+          <div className="h-72 md:h-auto relative overflow-hidden">
             <img
               src={hugoAnne}
               alt="Hugo Varennes et Anne Delorme"
               className="absolute inset-0 h-full w-full object-cover object-center"
             />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(to right, transparent 60%, color-mix(in oklab, var(--color-secondary) 80%, transparent))" }} />
           </div>
           {/* Texte */}
-          <div className="px-8 py-10 md:py-8">
-            <span className="tricolore-accent mb-5" />
-            <h2 className="mt-4 font-display text-2xl font-semibold text-foreground">
+          <div className="px-8 py-10">
+            <span className="tricolore-accent" />
+            <h2 className="mt-5 font-display text-2xl font-semibold text-foreground">
               Avec Anne, à ses côtés.
             </h2>
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
               Hugo Varennes et Anne Delorme se rencontrent à Sciences Po Paris. Fille de notaires bordelais,
               Anne est avocate. Ensemble depuis trente ans, ils ont deux enfants : Gabriel et Lou.
             </p>
-            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+            <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
               « Anne est ma boussole. Elle dit ce que les autres n'osent pas. C'est la qualité la plus
               rare qui soit. »
             </p>
